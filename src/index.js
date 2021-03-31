@@ -43,7 +43,7 @@ class AdvancedGlanceCard extends LitElement {
 
   render() {
     return html`
-        <ha-card style="--glance-column-width:${100 / this.entities.length}%;">
+        <ha-card style="--glance-column-width:${100 / Math.min(this.entities.length, 3)}%;">
           ${this.renderHeader(this.config.title)}
           <slot></slot>
           <div class="entities">
