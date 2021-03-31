@@ -1,5 +1,4 @@
 .ignore
-advanced-glance-card.js
 node_modules
 yarn-error.log
 .nvmrc
