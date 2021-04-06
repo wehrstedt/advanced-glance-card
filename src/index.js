@@ -141,8 +141,14 @@ class AdvancedGlanceCard extends LitElement {
 
   renderDomainCover(entity) {
     const stateObj = this._hass.states[entity];
-    const isclosed = stateObj.state === 0.0;
-    const isopen = stateObj.state === 100.0;
+    const isclosed =
+      stateObj.attributes && typeof stateObj.attributes.current_position
+        ? stateObj.attributes.current_position === 0.0
+        : stateObj.state === "closed";
+    const isopen =
+      stateObj.attributes && typeof stateObj.attributes.current_position
+        ? stateObj.attributes.current_position === 100.0
+        : stateObj.state === "open";
 
     return html`
       <div class="entity-state" style="${this.grid(1)}">

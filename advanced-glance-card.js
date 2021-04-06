@@ -188,7 +188,7 @@ const Y=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeShad
             ${o(t.right)}
           </h1>
         </div>
-      `}}renderDomainCover(t){const e=this._hass.states[t],s=0===e.state,i=100===e.state;return R`
+      `}}renderDomainCover(t){const e=this._hass.states[t],s=e.attributes&&(e.attributes.current_position,1)?0===e.attributes.current_position:"closed"===e.state,i=e.attributes&&(e.attributes.current_position,1)?100===e.attributes.current_position:"open"===e.state;return R`
       <div class="entity-state" style="${this.grid(1)}">
         <span class="entity-value">
           <ha-icon-button
