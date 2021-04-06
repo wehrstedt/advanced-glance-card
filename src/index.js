@@ -43,27 +43,31 @@ class AdvancedGlanceCard extends LitElement {
 
   render() {
     return html`
-        <ha-card style="--glance-column-width:${100 / Math.min(this.entities.length, 3)}%;">
-          ${this.renderHeader(this.config.title)}
-          <slot></slot>
-          <div class="entities">
-            ${this.entities.map((entity) => this.renderEntity(entity))}
-          </div>
-          ${this.config.footer ? this.renderHeader(this.config.footer) : ""}
-        </ha-card>
+      <ha-card
+        style="--glance-column-width:${100 /
+        Math.min(this.entities.length, 3)}%;"
+      >
+        ${this.renderHeader(this.config.title)}
+        <slot></slot>
+        <div class="entities">
+          ${this.entities.map((entity) => this.renderEntity(entity))}
+        </div>
+        ${this.config.footer ? this.renderHeader(this.config.footer) : ""}
+      </ha-card>
     `;
   }
 
   renderHeader(title) {
     if (typeof title === "string" || Object.keys(title).length < 2) {
-      return html`
-        <h1 class="card-header">${title}</h1>
-      `;
+      return html` <h1 class="card-header">${title}</h1> `;
     } else {
       const defaultWidth = 100 / Object.keys(title).length;
-      const getWidth = (title) => title ? (title.width || defaultWidth) : defaultWidth
-      const getDisplay = (title) => typeof title === "undefined" ? "none" : "inline-block";
-      const getAlign = (title, defaultValue) => (title ? title.align : "") || defaultValue;
+      const getWidth = (title) =>
+        title ? title.width || defaultWidth : defaultWidth;
+      const getDisplay = (title) =>
+        typeof title === "undefined" ? "none" : "inline-block";
+      const getAlign = (title, defaultValue) =>
+        (title ? title.align : "") || defaultValue;
       const getColor = (title) => {
         if (title && typeof title.color === "string") {
           return `color: ${title.color}`;
@@ -96,19 +100,37 @@ class AdvancedGlanceCard extends LitElement {
         <div>
           <h1
             class="card-header"
-            style="display: ${getDisplay(title.left)}; float: left; width: calc(${getWidth(title.left)}% - 32px); text-align: ${getAlign(title.left, "left")};${getColor(title.left)}"
+            style="display: ${getDisplay(
+              title.left
+            )}; float: left; width: calc(${getWidth(
+              title.left
+            )}% - 32px); text-align: ${getAlign(title.left, "left")};${getColor(
+              title.left
+            )}"
           >
             ${getText(title.left)}
           </h1>
           <h1
             class="card-header"
-            style="display: ${getDisplay(title.center)}; width: calc(${getWidth(title.center)}% - 32px); text-align: ${getAlign(title.center, "center")};${getColor(title.center)}"
+            style="display: ${getDisplay(title.center)}; width: calc(${getWidth(
+              title.center
+            )}% - 32px); text-align: ${getAlign(
+              title.center,
+              "center"
+            )};${getColor(title.center)}"
           >
             ${getText(title.center)}
           </h1>
           <h1
             class="card-header"
-            style="display: ${getDisplay(title.right)}; float: right; width: calc(${getWidth(title.right)}% - 32px); text-align: ${getAlign(title.right, "right")};${getColor(title.right)}"
+            style="display: ${getDisplay(
+              title.right
+            )}; float: right; width: calc(${getWidth(
+              title.right
+            )}% - 32px); text-align: ${getAlign(
+              title.right,
+              "right"
+            )};${getColor(title.right)}"
           >
             ${getText(title.right)}
           </h1>
@@ -119,8 +141,8 @@ class AdvancedGlanceCard extends LitElement {
 
   renderDomainCover(entity) {
     const stateObj = this._hass.states[entity];
-    const isclosed = stateObj.state === "closed" || stateObj.state === 0.0;
-    const isopen = stateObj.state === "open" || stateObj.state === 100.0;
+    const isclosed = stateObj.state === 0.0;
+    const isopen = stateObj.state === 100.0;
 
     return html`
       <div class="entity-state" style="${this.grid(1)}">
@@ -164,23 +186,27 @@ class AdvancedGlanceCard extends LitElement {
       if (!entity.tap_action) {
         this.openEntityPopover(entity.entity);
       } else {
-        // @todo: Replace this handler with 
+        // @todo: Replace this handler with
         // https://github.com/custom-cards/custom-card-helpers/blob/b5add47ec1a58bea9d184133b6d33a5119718c32/src/handle-action.ts
         if (entity.tap_action.action === "call-service") {
           const [domain, action] = entity.tap_action.service.split(".");
-          this._hass.callService(domain, action, entity.tap_action.service_data);
+          this._hass.callService(
+            domain,
+            action,
+            entity.tap_action.service_data
+          );
         } else {
-          throw new Error("Unsupported action type: " + entity.tap_action.action);
+          throw new Error(
+            "Unsupported action type: " + entity.tap_action.action
+          );
         }
       }
-    }
+    };
 
     return html`
       <div class="entity" @click=${onClick}>
         <div class="name">
-          ${"name" in entity
-        ? entity.name
-        : this.computeStateName(stateObj)}
+          ${"name" in entity ? entity.name : this.computeStateName(stateObj)}
         </div>
         <state-badge
           hass=${this._hass}
@@ -197,7 +223,7 @@ class AdvancedGlanceCard extends LitElement {
     return stateObj.attributes.friendly_name === undefined
       ? this.computeObjectId(stateObj.entity_id).replace(/_/g, " ")
       : stateObj.attributes.friendly_name || "";
-  };
+  }
 
   computeObjectId(entityId) {
     return entityId.substr(entityId.indexOf(".") + 1);
@@ -229,8 +255,7 @@ window.customCards.push({
   type: "advanced-glance-card",
   name: "Extended Glance Card",
   preview: false,
-  description:
-    "TODO",
+  description: "TODO",
 });
 
 export default AdvancedGlanceCard;
