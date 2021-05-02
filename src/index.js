@@ -201,6 +201,11 @@ class AdvancedGlanceCard extends LitElement {
             action,
             entity.tap_action.service_data
           );
+        } else if (entity.tap_action.action === "fire-dom-event") {
+          this.fire("ll-custom", {
+            entity_id: entity.entity,
+            ...entity.tap_action,
+          });
         } else {
           throw new Error(
             "Unsupported action type: " + entity.tap_action.action
