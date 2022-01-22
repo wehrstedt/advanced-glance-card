@@ -45,7 +45,7 @@ class AdvancedGlanceCard extends LitElement {
     return html`
       <ha-card
         style="--glance-column-width:${100 /
-      Math.min(this.entities.length, 3)}%;"
+        Math.min(this.entities.length, 3)}%;"
       >
         ${this.renderHeader(this.config.title)}
         <slot></slot>
@@ -101,36 +101,36 @@ class AdvancedGlanceCard extends LitElement {
           <h1
             class="card-header"
             style="display: ${getDisplay(
-        title.left
-      )}; float: left; width: calc(${getWidth(
-        title.left
-      )}% - 32px); text-align: ${getAlign(title.left, "left")};${getColor(
-        title.left
-      )}"
+              title.left
+            )}; float: left; width: calc(${getWidth(
+              title.left
+            )}% - 32px); text-align: ${getAlign(title.left, "left")};${getColor(
+              title.left
+            )}"
           >
             ${getText(title.left)}
           </h1>
           <h1
             class="card-header"
             style="display: ${getDisplay(title.center)}; width: calc(${getWidth(
-        title.center
-      )}% - 32px); text-align: ${getAlign(
-        title.center,
-        "center"
-      )};${getColor(title.center)}"
+              title.center
+            )}% - 32px); text-align: ${getAlign(
+              title.center,
+              "center"
+            )};${getColor(title.center)}"
           >
             ${getText(title.center)}
           </h1>
           <h1
             class="card-header"
             style="display: ${getDisplay(
-        title.right
-      )}; float: right; width: calc(${getWidth(
-        title.right
-      )}% - 32px); text-align: ${getAlign(
-        title.right,
-        "right"
-      )};${getColor(title.right)}"
+              title.right
+            )}; float: right; width: calc(${getWidth(
+              title.right
+            )}% - 32px); text-align: ${getAlign(
+              title.right,
+              "right"
+            )};${getColor(title.right)}"
           >
             ${getText(title.right)}
           </h1>
@@ -158,18 +158,21 @@ class AdvancedGlanceCard extends LitElement {
             icon="hass:arrow-up"
             role="button"
             @click=${this._service("cover", "open_cover", entity)}
-          ><ha-icon icon="hass:arrow-up"></ha-icon></ha-icon-button>
+            ><ha-icon icon="hass:arrow-up"></ha-icon
+          ></ha-icon-button>
           <ha-icon-button
             icon="hass:stop"
             role="button"
             @click=${this._service("cover", "stop_cover", entity)}
-          ><ha-icon icon="hass:stop"></ha-icon></ha-icon-button>
+            ><ha-icon icon="hass:stop"></ha-icon
+          ></ha-icon-button>
           <ha-icon-button
             ?disabled=${isclosed}
             icon="hass:arrow-down"
             role="button"
             @click=${this._service("cover", "close_cover", entity)}
-          ><ha-icon icon="hass:arrow-down"></ha-icon></ha-icon-button>
+            ><ha-icon icon="hass:arrow-down"></ha-icon
+          ></ha-icon-button>
         </span>
       </div>
     `;
