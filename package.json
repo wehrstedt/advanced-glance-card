@@ -1,6 +1,6 @@
 {
   "name": "advanced-glance-card",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "advanced-glance-card.js",
   "author": "Maximilian Wehrstedt <wehrstedt.coding@outlook.de>",
   "description": "An advanced glance card for Home Assistant",
